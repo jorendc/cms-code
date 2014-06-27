@@ -9,12 +9,18 @@ class Page extends SiteTree {
 		'FadeSeconds' => 'Decimal',
 		'UseColorbox' => 'Boolean'
 	);
-	static $defaults = array(
-		'ShufflerWidth' => 400,
-		'ShufflerHeight' => 300,
-		'PauseSeconds' => 5.0,
-		'FadeSeconds' => 0.70
-	);
+    require_once THIRDPARTY_PATH."/Zend/Locale/Format.php";
+
+    static $defaults = array(
+                             'ShufflerWidth' => 400,
+                             'ShufflerHeight' => 300,
+                             'PauseSeconds' => Zend_Locale_Format::toNumber(5,
+                                                                            array('precision' => 2,
+                                                                                  'locale' => i18n::get_locale()))
+                             'FadeSeconds' => Zend_Locale_Format::toNumber(0.7,
+                                                                           array('precision' => 2,
+                                                                                 'locale' => i18n::get_locale()))
+                             );
 	static $has_many = array (
 		'Images' => 'ImageResource'
 	);
